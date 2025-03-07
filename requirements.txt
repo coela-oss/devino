@@ -1,0 +1,4 @@
+openvino
+huggingface_hub
+optimum-intel[openvino]
+transformers

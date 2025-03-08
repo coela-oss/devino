@@ -8,7 +8,6 @@ model_name = "cardiffnlp/twitter-roberta-base-sentiment-latest"
 
 print(f"Downloading and caching model: {model_name} to {cache_dir}...")
 tokenizer = AutoTokenizer.from_pretrained(model_name, cache_dir=cache_dir)
-model = AutoModel.from_pretrained(model_name, cache_dir=cache_dir)
 
 print("Download completed!")
 

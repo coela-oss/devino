@@ -1,14 +1,51 @@
-# Exam to Use LLMs on My Local PC (Intel Iris GPU)
+# Exams to Use LLMs on My Local PC (Intel Iris GPU)
 
 ## Overview
 
 This guide provides a general approach for individuals who do not own an Nvidia GPU and wish to perform inference using an integrated laptop GPU.
 
-The goal is to enable local execution of LLMs without modifying existing development environments or considering the purchase of a new PC.
+The goal is to enable local execution of LLMs casual without modifying existing development environments or considering the purchase of a new PC.
+
+## Result Summary
+
+By enabling GPU acceleration, performance improved by **5.7x**.
+
+```
+vscode ➜ /workspaces/devino (main) $ python playground/inference/roberta_text_classification.py
+Function 'infer_with_transformer' executed in 9.391381 seconds
+Function 'infer_with_openvino' executed in 1.628792 seconds
+Transformer Model Prediction:
+1) neutral 0.703
+2) positive 0.2633
+3) negative 0.0337
+
+OpenVINO Model Prediction:
+1) neutral 0.7033
+2) positive 0.2629
+3) negative 0.0338
+```
+
+## Exams Outline
+
+* **Recognizing the GPU Driver**
+  * **Windows**
+    * Set up the GPU driver on the PC
+  * **Docker**
+    * Verify GPU driver recognition using Docker CLI
+    * Check GPU driver recognition with Docker Desktop WSL Integration
+* **Obtaining and Converting LLMs**
+  * Download from Hugging Face
+  * Export to OpenVINO (IR) format
+    * https://docs.openvino.ai/2025/openvino-workflow/running-inference/optimize-inference/optimizing-memory-usage.html
+* **Inference**
+  * Text Classification
+  * Text Generation (WIP)
+    * https://docs.openvino.ai/2023.3/openvino_docs_OV_Converter_UG_prepare_model_convert_model_Convert_Model_From_ONNX.html
+
 
 ### PC Specifications
 
-Spec I tried, but if you have newer than 11th generation Intel CPU, and emdebed GPU it should work the same.
+It's the spec I tried, but if you have newer than 11th generation Intel CPU and GPU emdebed, it should work the same.
 
 Detail compatibility can see [openvino/system-requirements](https://docs.openvino.ai/2025/about-openvino/release-notes-openvino/system-requirements.html)
 
@@ -42,42 +79,4 @@ other keywords see [glossary doc](https://huggingface.co/docs/transformers/main/
 
 **Note:**  
 Refer to the [2025 OpenVINO documentation](https://docs.openvino.ai/2025/index.html) for the latest installation methods.
-
-
-## Outline
-
-* **Recognizing the GPU Driver**
-  * **Windows**
-    * Set up the GPU driver on the PC
-  * **Docker**
-    * Verify GPU driver recognition using Docker CLI
-    * Check GPU driver recognition with Docker Desktop WSL Integration
-* **Obtaining and Converting LLMs**
-  * Download from Hugging Face
-  * Export to OpenVINO (IR) format
-    * https://docs.openvino.ai/2025/openvino-workflow/running-inference/optimize-inference/optimizing-memory-usage.html
-* **Inference**
-  * Text Classification
-  * Text Generation (WIP)
-    * https://docs.openvino.ai/2023.3/openvino_docs_OV_Converter_UG_prepare_model_convert_model_Convert_Model_From_ONNX.html
-
-## Simple Checks
-
-By enabling GPU acceleration, performance improved by **5.7x**.
-
-```
-vscode ➜ /workspaces/devino (main) $ python playground/inference/transformer_text_classification.py
-Function 'infer_with_transformer' executed in 9.391381 seconds
-Function 'infer_with_openvino' executed in 1.628792 seconds
-Transformer Model Prediction:
-1) neutral 0.703
-2) positive 0.2633
-3) negative 0.0337
-
-OpenVINO Model Prediction:
-1) neutral 0.7033
-2) positive 0.2629
-3) negative 0.0338
-```
-
 

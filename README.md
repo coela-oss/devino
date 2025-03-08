@@ -42,6 +42,34 @@ OpenVINO Model Prediction:
   * Text Generation
     * https://docs.openvino.ai/2023.3/openvino_docs_OV_Converter_UG_prepare_model_convert_model_Convert_Model_From_ONNX.html
 
+## How to Use This Repository
+
+### Tools Setup
+* Install [VSCode](https://code.visualstudio.com/)
+* Install [Docker Desktop](https://www.docker.com/get-started/)
+* Install [Git for Windows](https://git-scm.com/downloads/win)
+* Install [Intel GPU Driver](?tab=readme-ov-file#pc-specifications)
+
+### Container Build
+* Clone This Repo and Open in VSCode
+  * ```git clone https://github.com/coela-oss/devino.git```
+  * ```code devino```
+* Decide Mount Directory for LLMs
+  * Modify [Devcontainer JSON](.devcontainer/devcontainer.json)
+* Build Devcontainer
+
+### Run scripts in Devcontainer
+
+ex) Check the GPU driver is recognized
+
+```
+vscode ➜ /workspaces/devino (main) $ python playground/gpu_devices.py 
+# ['CPU', 'GPU']
+```
+
+if it shows CPU only, GPU Driver invalid setup. 
+
+## Details
 
 ### PC Specifications
 
@@ -49,12 +77,10 @@ It's the spec I tried, but if you have newer than 11th generation Intel CPU and 
 
 Detail compatibility can see [openvino/system-requirements](https://docs.openvino.ai/2025/about-openvino/release-notes-openvino/system-requirements.html)
 
-
 * **OS:** Windows 11 Home 24H2
     * **Memory:** 16GB
     * **CPU:** [12th Gen Intel(R) Core(TM) i5-1235U 1.30 GHz](https://www.intel.com/content/www/us/en/products/sku/226261/intel-core-i51235u-processor-12m-cache-up-to-4-40-ghz/specifications.html)
         * **GPU:** Intel(R) Iris(R) Xe Graphics
-
 
 ### Runtime Environment
 

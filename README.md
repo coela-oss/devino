@@ -39,7 +39,7 @@ OpenVINO Model Prediction:
     * https://docs.openvino.ai/2025/openvino-workflow/running-inference/optimize-inference/optimizing-memory-usage.html
 * **Inference**
   * Text Classification
-  * Text Generation (WIP)
+  * Text Generation
     * https://docs.openvino.ai/2023.3/openvino_docs_OV_Converter_UG_prepare_model_convert_model_Convert_Model_From_ONNX.html
 
 

@@ -8,13 +8,16 @@ The goal is to enable local execution of LLMs without modifying existing develop
 
 ### PC Specifications
 
+Spec I tried, but if you have newer than 11th generation Intel CPU, and emdebed GPU it should work the same.
+
+Detail compatibility can see [openvino/system-requirements](https://docs.openvino.ai/2025/about-openvino/release-notes-openvino/system-requirements.html)
+
+
 * **OS:** Windows 11 Home 24H2
     * **Memory:** 16GB
     * **CPU:** [12th Gen Intel(R) Core(TM) i5-1235U 1.30 GHz](https://www.intel.com/content/www/us/en/products/sku/226261/intel-core-i51235u-processor-12m-cache-up-to-4-40-ghz/specifications.html)
         * **GPU:** Intel(R) Iris(R) Xe Graphics
 
-**Note:**  
-TODO: Add a link to Intel's driver compatibility table.
 
 ### Runtime Environment
 
@@ -23,7 +26,7 @@ TODO: Add a link to Intel's driver compatibility table.
 * **Docker (including Devcontainer)**
     * Debian Bookworm with Python 3.11 (Devcontainer uses the official Microsoft Python container)
 
-### Model Sources
+### Model Sources Download
 
 * **Hugging Face**
   * `transformers`
@@ -35,10 +38,11 @@ TODO: Add a link to Intel's driver compatibility table.
 * OpenVINO
 * optimum-intel
 
+other keywords see [glossary doc](https://huggingface.co/docs/transformers/main/en/glossary) by huggingface.
+
 **Note:**  
 Refer to the [2025 OpenVINO documentation](https://docs.openvino.ai/2025/index.html) for the latest installation methods.
 
-TODO: Add 2025 setup instructions.
 
 ## Outline
 
@@ -51,19 +55,18 @@ TODO: Add 2025 setup instructions.
 * **Obtaining and Converting LLMs**
   * Download from Hugging Face
   * Export to OpenVINO (IR) format
+    * https://docs.openvino.ai/2025/openvino-workflow/running-inference/optimize-inference/optimizing-memory-usage.html
 * **Inference**
   * Text Classification
   * Text Generation (WIP)
+    * https://docs.openvino.ai/2023.3/openvino_docs_OV_Converter_UG_prepare_model_convert_model_Convert_Model_From_ONNX.html
 
-## Results
+## Simple Checks
 
 By enabling GPU acceleration, performance improved by **5.7x**.
 
 ```
-vscode ➜ /workspaces/devino (main) $ python playground/inference/transformer_classification.py
-Some weights of the model checkpoint at /workspaces/devino/mnt/models/models--cardiffnlp--twitter-roberta-base-sentiment-latest/snapshots/4ba3d4463bd152c9e4abd892b50844f30c646708 were not used when initializing RobertaForSequenceClassification: ['roberta.pooler.dense.bias', 'roberta.pooler.dense.weight']
-- This IS expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
-- This IS NOT expected if you are initializing RobertaForSequenceClassification from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+vscode ➜ /workspaces/devino (main) $ python playground/inference/transformer_text_classification.py
 Function 'infer_with_transformer' executed in 9.391381 seconds
 Function 'infer_with_openvino' executed in 1.628792 seconds
 Transformer Model Prediction:

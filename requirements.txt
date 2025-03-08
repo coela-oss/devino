@@ -2,3 +2,7 @@ openvino
 huggingface_hub
 optimum-intel[openvino]
 transformers
+mkdocs
+onnxruntime
+onnxruntime-tools
+tensorflow

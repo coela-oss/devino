@@ -3,23 +3,10 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer
 import openvino as ov
 import torch
 import numpy as np
-import time
+from util import measure_time
 
-def measure_time(func):
-    def wrapper(*args, **kwargs):
-        start_time = time.perf_counter()
-        result = func(*args, **kwargs)
-        end_time = time.perf_counter()
-        elapsed_time = end_time - start_time
-        print(f"Function '{func.__name__}' executed in {elapsed_time:.6f} seconds")
-        return result
-    return wrapper
-
-
-MODEL_PATH = "/workspaces/devino/mnt/models/models--cardiffnlp--twitter-roberta-base-sentiment-latest/snapshots/4ba3d4463bd152c9e4abd892b50844f30c646708"
-SAVE_MODEL_PATH = Path("/workspaces/devino/mnt/text/models/cardiffnlp--twitter-roberta-base-sentiment-latest/model.xml")
-
-# export TOKENIZERS_PARALLELISM=true
+MODEL_PATH = "/workspaces/devino/mnt/models/huggingface/models--cardiffnlp--twitter-roberta-base-sentiment-latest/snapshots/4ba3d4463bd152c9e4abd892b50844f30c646708"
+SAVE_MODEL_PATH = Path("/workspaces/devino/mnt/models/openvino/cardiffnlp--twitter-roberta-base-sentiment-latest/model.xml")
 
 def load_model(model_path: str):
     """Load the Transformer model and tokenizer."""
@@ -31,13 +18,6 @@ def load_model(model_path: str):
 def tokenize_text(tokenizer, text: str):
     """Tokenize input text."""
     return tokenizer(text, return_tensors="pt")
-
-
-def convert_and_save_model(model, example_input, save_path: Path):
-    """Convert PyTorch model to OpenVINO format and save it."""
-    if not save_path.exists():
-        ov_model = ov.convert_model(model, example_input=dict(example_input))
-        ov.save_model(ov_model, save_path)
 
 
 def load_openvino_model(save_path: Path):
@@ -77,10 +57,7 @@ if __name__ == "__main__":
     # Tokenize text
     text = "今日は晴れです！"
     encoded_input = tokenize_text(tokenizer, text)
-    
-    # Convert and save OpenVINO model
-    convert_and_save_model(model, encoded_input, SAVE_MODEL_PATH)
-    
+        
     # Load OpenVINO model
     compiled_model = load_openvino_model(SAVE_MODEL_PATH)
     

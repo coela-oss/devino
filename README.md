@@ -48,7 +48,7 @@ OpenVINO Model Prediction:
 * Install [VSCode](https://code.visualstudio.com/)
 * Install [Docker Desktop](https://www.docker.com/get-started/)
 * Install [Git for Windows](https://git-scm.com/downloads/win)
-* Install [Intel GPU Driver](?tab=readme-ov-file#pc-specifications)
+* Install Intel GPU Driver ([Detail PC Specification](?tab=readme-ov-file#pc-specifications))
 
 ### Container Build
 * Clone This Repo and Open in VSCode

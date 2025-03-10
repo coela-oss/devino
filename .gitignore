@@ -5,3 +5,7 @@ config.ini
 mnt
 models
 neo
+bin
+include
+lib
+lib64

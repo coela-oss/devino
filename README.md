@@ -95,11 +95,35 @@ Detail compatibility can see [openvino/system-requirements](https://docs.openvin
   * `transformers`
   * `huggingface_hub`
 
+```
+2025-03-08 13:03:05.147523: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+config.json: 100%|██████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 802/802 [00:00<00:00, 3.91MB/s]
+Traceback (most recent call last):
+  File "/workspaces/devino/playground/inference/ms_phi4_text_generation.py", line 3, in <module>
+    pipeline = transformers.pipeline(
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vscode/.local/lib/python3.11/site-packages/transformers/pipelines/__init__.py", line 940, in pipeline
+    framework, model = infer_framework_load_model(
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vscode/.local/lib/python3.11/site-packages/transformers/pipelines/base.py", line 289, in infer_framework_load_model
+    model = model_class.from_pretrained(model, **kwargs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vscode/.local/lib/python3.11/site-packages/transformers/models/auto/auto_factory.py", line 564, in from_pretrained
+    return model_class.from_pretrained(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vscode/.local/lib/python3.11/site-packages/transformers/modeling_utils.py", line 3535, in from_pretrained
+    raise ImportError(
+ImportError: Using `low_cpu_mem_usage=True` or a `device_map` requires Accelerate: `pip install 'accelerate>=0.26.0'`
+```
+
+
 ### Additional Tools & Keywords
 
 * Intel GPU Driver
 * OpenVINO
 * optimum-intel
+  * https://huggingface.co/blog/deploy-with-openvino
 
 other keywords see [glossary doc](https://huggingface.co/docs/transformers/main/en/glossary) by huggingface.
 

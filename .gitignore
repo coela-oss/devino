@@ -4,8 +4,5 @@ __pycache__
 config.ini
 mnt
 models
-neo
-bin
-include
-lib
-lib64
+.env
+venv

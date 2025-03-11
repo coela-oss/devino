@@ -1,16 +1,18 @@
-#--extra-index-url https://download.pytorch.org/whl/cpu
-
 openvino-genai
+openvino-tokenizers[transformers]
 optimum-intel[openvino]
-#optimum
-#nncf
+optimum
+nncf
 
-#onnx
-#onnxruntime
-#torch
-#intel-tensorflow
+onnx
+onnxruntime
+onnxruntime-openvino
+torch
+transformers
+huggingface_hub
+tensorflow-intel
+accelerate
 
-#transformers
-#huggingface_hub
+click
 
-#mkdocs
+vllm

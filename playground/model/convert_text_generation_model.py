@@ -1,41 +1,45 @@
+import os
 from pathlib import Path
-import openvino as ov
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoModelForCausalLM, AutoConfig
 from optimum.intel import OVModelForCausalLM
+import torch
 
-MODEL_PATH = Path("/workspaces/devino/mnt/models/huggingface/models--trl-internal-testing--tiny-Qwen2ForCausalLM-2.5/snapshots/6cee29cc49b4932e8eef091a2904ee90a8cbe46a")
-SAVE_MODEL_PATH = Path("mnt/models/openvino/trl-internal-testing--tiny-Qwen2ForCausalLM-2.5/model.xml")
+# https://github.com/openvinotoolkit/openvino_notebooks/blob/latest/notebooks/llm-chatbot/llm-chatbot.ipynb
+# optimum-cli export openvino --task text-generation --weight-format fp16 --model "microsoft/phi-4-mini-instruct" --cache_dir "/mnt/c/Coela/llm/models/huggingface" "/mnt/c/Coela/llm/models/openvino/microsoft--Phi-4-mini-instruct"
+
+cache_dir = "/mnt/c/Coela/llm/models/huggingface"
+os.environ["HF_HOME"] = cache_dir
+
+model_name = "microsoft/Phi-4-mini-instruct"
+
+SAVE_MODEL_PATH = Path("/mnt/c/Coela/llm/models/openvino/microsoft--Phi-4-mini-instruct")
 
 
-def load_model(model_path: str):
+def load_model():
+    torch.random.manual_seed(0)
     """Load the Transformer model and tokenizer."""
-    tokenizer = AutoTokenizer.from_pretrained(model_path)
-    model = OVModelForCausalLM.from_pretrained(model_path)
-    return model, tokenizer
+    model = OVModelForCausalLM.from_pretrained(
+        model_name,
+        compile=True,
+        torch_dtype=torch.bfloat16,
+        cache_dir=cache_dir,
+        config=AutoConfig.from_pretrained(model_name)
+    )
+    return model
 
 
-def convert_and_save_model(model, tokenizer, save_path: Path):
+def convert_and_save_model(model, save_path: Path):
     """Convert PyTorch model to OpenVINO format and save it."""
-    prompt = "Give me a short introduction to large language models."
-    messages = [{"role": "user", "content": prompt}]
-    text = tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-    print(f"Tokenized Text:\n{text}")
-
-    inputs = tokenizer(text, return_tensors="pt")
     # Disable KV caching (Fixes `past_key_values` issue)
     model.config.use_cache = False  # Fix for OpenVINO compatibility
-
-    if not save_path.exists():
-        #ov_model = ov.convert_model(
-        #    model,
-        #    #example_input=(inputs["input_ids"], inputs["attention_mask"]),
-        #    verbose=True
-        #)
-        ov.save_model(model, save_path)
+    # https://docs.openvino.ai/2025/openvino-workflow/torch-compile.html
+    # https://huggingface.co/docs/optimum/main/intel/openvino/inference#export
+    model.to("gpu")
+    model.save_pretrained(save_path)
 
 
 if __name__ == "__main__":
     # Load model and tokenizer
-    model, tokenizer = load_model(MODEL_PATH)
+    model = load_model()
     # Convert and save OpenVINO model
-    convert_and_save_model(model, tokenizer, SAVE_MODEL_PATH)
+    convert_and_save_model(model, SAVE_MODEL_PATH)

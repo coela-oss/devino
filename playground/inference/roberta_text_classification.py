@@ -5,8 +5,8 @@ import torch
 import numpy as np
 from util import measure_time
 
-MODEL_PATH = "/workspaces/devino/mnt/models/huggingface/models--cardiffnlp--twitter-roberta-base-sentiment-latest/snapshots/4ba3d4463bd152c9e4abd892b50844f30c646708"
-SAVE_MODEL_PATH = Path("/workspaces/devino/mnt/models/openvino/cardiffnlp--twitter-roberta-base-sentiment-latest/model.xml")
+MODEL_PATH = "/mnt/c/Coela/llm/models/huggingface/models--cardiffnlp--twitter-roberta-base-sentiment-latest/snapshots/4ba3d4463bd152c9e4abd892b50844f30c646708"
+SAVE_MODEL_PATH = Path("/mnt/c/Coela/llm/models/openvino/cardiffnlp--twitter-roberta-base-sentiment-latest/model.xml")
 
 def load_model(model_path: str):
     """Load the Transformer model and tokenizer."""

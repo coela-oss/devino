@@ -33,6 +33,9 @@ OpenVINO Model Prediction:
   * **Docker**
     * Verify GPU driver recognition using Docker CLI
     * Check GPU driver recognition with Docker Desktop WSL Integration
+* **Download LLMs**
+  * Not Available quantize int4
+    * https://github.com/openvinotoolkit/openvino/pull/29067
 * **Obtaining and Converting LLMs**
   * Download from Hugging Face
   * Export to OpenVINO (IR) format

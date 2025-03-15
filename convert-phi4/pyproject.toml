@@ -1,0 +1,25 @@
+[project]
+name = "convert-phi4"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "coela-oss",email = "to@coela.org"}
+]
+readme = "README.md"
+requires-python = ">=3.11,<4"
+dependencies = [
+    "transformers (>=4.49.0,<5.0.0)",
+    "torch[xpu] (>=2.6.0,<3.0.0)",
+    "openvino (>=2025.0.0,<2026.0.0)",
+    "nncf (>=2.15.0,<3.0.0)",
+    "tensorflow (>=2.19.0,<3.0.0)",
+]
+
+
+[tool.poetry]
+packages = [{include = "convert_phi4", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

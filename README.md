@@ -4,10 +4,10 @@ This repository provides an environment for leveraging OpenVINO and OneAPI to en
 
 ## Repository Structure
 
-- **playground/**: Contains sample scripts tested in an OpenVINO 2025 and Ubuntu 24 environment.
-- **setup/**: Provides scripts for setting up a Pytorch-XPU environment using Ubuntu 22 and Poetry.
+- [setup](./setup): Provides scripts for setting up a Pytorch-XPU environment using Ubuntu 22 and Poetry.
 installation.
-- **Model Directories**: Named according to Hugging Face model IDs, each containing conversion and inference scripts based on the setup environment.
+- Model Directories: Named according to Hugging Face model IDs, each containing conversion and inference scripts based on the setup environment.
+- [playground](./playground/): Contains sample scripts tested in an OpenVINO 2025 and Ubuntu 24 environment.
 
 ## Key Features
 

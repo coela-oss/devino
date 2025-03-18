@@ -6,35 +6,21 @@ authors = ["coela-oss <to@coela.org>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.9.21"
+python = "3.10.16"
 click = "^8.1.8"
 
-openvino = "2025.0.0"
+openvino = "2024.0.0"
 nncf = "^2.15.0"
 
-transformers = "^4.48.3"
-optimum = {extras = ["nncf", "openvino"], version = "^1.24.0"}
+transformers = "4.35.0"
+optimum = {extras = ["nncf", "openvino"], version = "1.18.0"}
 
 tensorflow = "2.15.0"
 intel-extension-for-tensorflow = { version = "2.15.0.2", extras = ["xpu"] }
 tf-keras = "2.15.0"
 
-torch = {version = "2.5.1+cxx11.abi", source = "pytorch-intel-xpu-extension-src"}
-intel-extension-for-pytorch ={version = "2.5.10+xpu", source = "pytorch-intel-xpu-extension-src"}
-oneccl-bind-pt = { version = "2.5.0+xpu", source = "pytorch-intel-xpu-extension-src"}
-accelerate = "^1.5.1"
-openvino-genai = "^2025.0.0.0"
-
-[[tool.poetry.source]]
-name = "pytorch-intel-xpu-src"
-url = "https://download.pytorch.org/whl/xpu"
-priority = "explicit"
-
-
-[[tool.poetry.source]]
-name = "pytorch-intel-xpu-extension-src"
-url = "https://pytorch-extension.intel.com/release-whl/stable/xpu/us/"
-priority = "explicit"
+#openvino-genai = "2024.2.0"
+torch = {path = "/home/vscode/pytorch/dist/torch-2.5.0a0+git32f585d-cp310-cp310-linux_x86_64.whl"}
 
 [build-system]
 requires = ["poetry-core"]

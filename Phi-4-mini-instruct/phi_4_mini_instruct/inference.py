@@ -1,5 +1,5 @@
 import os
-import openvino_genai
+#import openvino_genai
 import openvino
 import numpy as np
 import torch
@@ -124,14 +124,15 @@ def infer_with_openvino_genai():
     # https://github.com/openvinotoolkit/openvino/blob/master/src/plugins/intel_gpu/docs/memory_allocation_gpu_plugin.md
     # models/openvino/microsoft--Phi-4-mini-instruct/openvino_model.xml self.model.model.embed_tokens.weight
 
-    genai_tokenizer = openvino_genai.Tokenizer(ov_model_dir)
-    beam_idx = np.array([0], dtype=np.int32)
-    pipe = openvino_genai.LLMPipeline(ov_model_dir, genai_tokenizer, "AUTO")
+    #genai_tokenizer = openvino_genai.Tokenizer(ov_model_dir)
+    #beam_idx = np.array([0], dtype=np.int32)
+    #pipe = openvino_genai.LLMPipeline(ov_model_dir, genai_tokenizer, "AUTO")
 
-    result = pipe.generate(messages[0]["content"], beam_idx=beam_idx, max_new_tokens=1)
+    #result = pipe.generate(messages[0]["content"], beam_idx=beam_idx, max_new_tokens=1)
 
-    print(f"Prompt:\n{messages[0]}")
-    print(f"Generated:\n{result}")
+    #print(f"Prompt:\n{messages[0]}")
+    #print(f"Generated:\n{result}")
+    pass
 
 if __name__ == "__main__":
     #infer_with_openvino_gpu_cache()

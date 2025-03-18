@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-.PHONY: help install-dependencies update-dependencies load
+.PHONY: help install-dependencies update-dependencies load inference
 
 MODEL_ID=microsoft/Phi-4-mini-instruct-onnx
 
@@ -21,4 +21,12 @@ load: ## Load model from HugggingFace
 	MODEL_ID=${MODEL_ID} \
 	TF_ENABLE_ONEDNN_OPTS=1 \
 	LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${OVMS_LD_LIBRARY_PATH}:/lib:/usr/lib:/usr/lib/x86_64-linux-gnu \
-	poetry run python src/convert_phi4/load.py
+	poetry run python src/phi4_onnx/load.py
+
+include ../.env
+inference: ## Inference model from HugggingFace
+	# source /opt/intel/oneapi/setvars.sh --force
+	HF_HOME=${HF_HOME} \
+	OV_HOME=${OV_HOME} \
+	MODEL_ID=${MODEL_ID} \
+	poetry run python src/phi4_onnx/inference.py

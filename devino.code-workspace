@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"name": "devino",
+			"path": "."
+		},
+		{
+			"name": "pytorch",
+			"path": "../pytorch"
+		},
+		{
+			"path": "../../../mnt/c/Coela/llm/models"
+		}
+	],
+	"settings": {
+		"makefile.makefilePath": "/home/vscode/pytorch"
+	}
+}

@@ -30,7 +30,7 @@ inference: ## Inference model from Openvino IR
 	OV_HOME=${OV_HOME} \
 	MODEL_ID=${MODEL_ID} \
 	TF_ENABLE_ONEDNN_OPTS=0 \
-	LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${OVMS_LD_LIBRARY_PATH}:/lib:/usr/lib:/usr/lib/x86_64-linux-gnu \
+	LD_LIBRARY_PATH=${LD_LIBRARY_PATH} \
 	poetry run python phi_4_mini_instruct/inference.py
 
 

@@ -1,5 +1,5 @@
 [project]
-name = "convert-phi4"
+name = "phi4-onnx"
 version = "0.1.0"
 description = ""
 authors = [
@@ -17,7 +17,7 @@ dependencies = [
 
 
 [tool.poetry]
-packages = [{include = "convert_phi4", from = "src"}]
+packages = [{include = "phi4_onnx", from = "src"}]
 
 
 [build-system]

@@ -91,7 +91,6 @@ git clone --recursive -b v2.5.0-rc10 https://github.com/pytorch/pytorch.git
 cd pytorch
 git submodule sync
 git submodule update --init --recursive
-cd ~/devino/setup
 
 # ===== 9. Activate Development Environment =====
 # Set up environment variables for PyTorch with Intel GPU support
@@ -100,7 +99,7 @@ cd ~/devino/setup
 # https://github.com/uxlfoundation/oneDNN/issues/559
 # https://stackoverflow.com/questions/77921357/warning-while-using-tensorflow-tensorflow-core-util-port-cc113-onednn-custom
 $(poetry env activate -C ~/devino/setup)
-export USE_XPU=1
+export USE_XPU=ON
 export USE_NUMPY=0
 export _GLIBCXX_USE_CXX11_ABI=1
 # export USE_CUDA=ON # OFF, Not 0 And If set OFF, USE_XPU to OFF forcely.
@@ -109,10 +108,6 @@ export BUILD_TEST=0
 make triton
 source /opt/intel/oneapi/setvars.sh
 
-export PATH=/opt/intel/oneapi/compiler/2024.1/bin:${PATH}
-
-# If you want to check the behave oneapi libs,
-# source /opt/intel/oneapi/setvars.sh
 
 # ===== 10. Setup Completion Message =====
 echo "Setup completed successfully!"

@@ -5,14 +5,17 @@
 			"path": "."
 		},
 		{
-			"name": "pytorch",
-			"path": "../pytorch"
-		},
-		{
-			"path": "../../../mnt/c/Coela/llm/models"
+			"path": "/mnt/c/Coela/llm/models"
 		}
 	],
 	"settings": {
-		"makefile.makefilePath": "/home/vscode/pytorch"
+		"debugpy.debugJustMyCode": true,
+		"python-envs.pythonProjects": [
+			{
+				"path": "local_hugginface_nocache/models--microsoft--Phi-4-mini-instruct-onnx",
+				"envManager": "ms-python.python:venv",
+				"packageManager": "ms-python.python:pip"
+			}
+		]
 	}
 }

@@ -1,0 +1,29 @@
+[project]
+name = "load-models"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "coela-oss",email = "to@coela.org"}
+]
+readme = "README.md"
+requires-python = "=3.12.9"
+dependencies = [
+    "huggingface-hub (>=0.29.3,<0.30.0)",
+    "optimum-intel (>=1.22.0,<2.0.0)",
+    "openvino-genai (==2024.6.0.0)",
+    "nncf (>=2.15.0,<3.0.0)",
+    "onnx (>=1.17.0,<2.0.0)",
+    "optimum[openvino] (>=1.24.0,<2.0.0)",
+    "onnxruntime (>=1.21.0,<2.0.0)",
+    "openvino (==2024.6.0)",
+    "transformers (==4.48.3)",
+    "onnxruntime-genai (>=0.6.0,<0.7.0)"
+]
+
+[tool.poetry]
+packages = [{include = "llm_model_loader", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

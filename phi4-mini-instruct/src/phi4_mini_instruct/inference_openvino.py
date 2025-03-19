@@ -14,9 +14,11 @@ if not model_id or not ov_home:
 model_id_transformed = model_id.replace("/", "--")
 model_home_dir = os.path.join(ov_home, model_id_transformed)
 
+
 def streamer(subword):
     print(subword, end='', flush=True)
-    return False
+    # Return flag corresponds whether generation should be stopped.
+    return openvino_genai.StreamingStatus.RUNNING
 
 
 def infer(args):
@@ -40,8 +42,8 @@ def infer(args):
             prompt = input('question:\n')
         except EOFError:
             break
-        pipe.generate(prompt, config, streamer)
-        print('\n----------')
+        pipe.generate(prompt, generation_config=config, streamer=streamer)
+        print('\n----------\n')
     pipe.finish_chat()
 
 
@@ -78,13 +80,12 @@ def build_generation_config(
     config = pipe.get_generation_config()
 
 
-    #config.temperature = temperature
-    #config.top_p = top_p
-    #if top_k > 0:
-    #    config.top_k = top_k
-    #config.max_new_tokens = max_new_tokens
+    config.temperature = temperature
+    config.top_p = top_p
+    if top_k > 0:
+        config.top_k = top_k
+    config.max_new_tokens = max_new_tokens
     config.max_length = 2048
-
     print(f"{config}")
 
     return config

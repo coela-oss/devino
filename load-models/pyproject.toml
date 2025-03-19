@@ -9,16 +9,28 @@ readme = "README.md"
 requires-python = "=3.12.9"
 dependencies = [
     "huggingface-hub (>=0.29.3,<0.30.0)",
-    "optimum-intel (>=1.22.0,<2.0.0)",
-    "openvino-genai (==2024.6.0.0)",
     "nncf (>=2.15.0,<3.0.0)",
     "onnx (>=1.17.0,<2.0.0)",
-    "optimum[openvino] (>=1.24.0,<2.0.0)",
     "onnxruntime (>=1.21.0,<2.0.0)",
-    "openvino (==2024.6.0)",
-    "transformers (==4.48.3)",
-    "onnxruntime-genai (>=0.6.0,<0.7.0)"
+    "onnxruntime-genai (>=0.6.0,<0.7.0)",
+    "openvino-genai (>=2025.2.0.0.dev20250318,<2026.0.0.0)",
+    "openvino (>=2025.2.0.dev20250318,<2026.0.0)",
+    "transformers (>=4.49.0,<5.0.0)",
+    "optimum @ git+https://github.com/huggingface/optimum.git",
+    "optimum-intel @ git+https://github.com/huggingface/optimum-intel.git",
+    "tensorflow (>=2.19.0,<3.0.0)",
+    "tf-keras (>=2.19.0,<3.0.0)",
 ]
+
+[[tool.poetry.source]]
+name = "openvino-nightly"
+url = "https://storage.openvinotoolkit.org/simple/wheels/nightly"
+priority = "supplemental"
+
+
+[tool.poetry.dependencies]
+openvino-genai = {source = "openvino-nightly"}
+openvino = {source = "openvino-nightly"}
 
 [tool.poetry]
 packages = [{include = "llm_model_loader", from = "src"}]

@@ -1,9 +1,8 @@
 SHELL := /bin/bash
 
-.PHONY: help download-phi4-mini-onnx-local convert-phi4-mini-onnx convert-phi4-mini
+.PHONY: help download-phi4-mini-onnx-local convert-phi4-mini
 
 MODEL_ID=microsoft/Phi-4-mini-instruct
-
 
 help:	## Show this help.
 	@grep -hE '^[A-Za-z0-9_ \-]*?:.*##.*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -33,7 +32,7 @@ convert-phi4-mini:
 	OV_HOME=${OV_HOME} \
 	poetry run optimum-cli export openvino \
 		--model ${MODEL_ID} \
-		--task "text-generation" \
+		--task "text-generation-with-past" \
 		--cache_dir ${HF_HOME}/hub \
 		--trust-remote-code \
 		"${OV_HOME}/microsoft--Phi-4-mini-instruct"

@@ -6,6 +6,9 @@
 		},
 		{
 			"path": "/mnt/c/Coela/llm/models"
+		},
+		{
+			"path": "../optimum-intel"
 		}
 	],
 }
